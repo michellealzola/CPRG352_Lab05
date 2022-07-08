@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import '../App.css'
 
 class PostList extends Component {
   constructor(props) {
@@ -44,7 +45,7 @@ class PostList extends Component {
     const { posts, errorMessage } = this.state
     return (
       <>
-        List of Albums
+        <h1>List of Albums</h1>
         <div >
           <table>
             <thead>
