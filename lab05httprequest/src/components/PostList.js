@@ -27,10 +27,30 @@ class PostList extends Component {
       <div>
       List of Albums
       {
+        <div>
+        <table>
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Thumbnail</th>
+            <th>Delete</th>
+          </tr>
+          </table>
+
+        </div>
+      }
+      {
         posts.length?
         posts.map(post => 
-        <div key={(post.id)}>
-        {post.id} {post.title} {post.thumbnailUrl}
+        <div>
+        <table>          
+          <tr key={(post.id)}>
+            <td>{post.id}</td>
+            <td>{post.title}</td>
+            <td><img src={post.thumbnailUrl} alt="thumbnail"></img></td>
+            <td><button>delete</button></td>
+          </tr>
+        </table>          
         </div>):
         null
       }
