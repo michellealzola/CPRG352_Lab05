@@ -30,7 +30,7 @@ class PostList extends Component {
       .then(response => {
         console.log('Deleted', response);
         
-        const posts = this.state.posts.filter(item => item.id !== id);  
+        const posts = this.state.posts.filter(post => post.id !== id);  
         this.setState({ posts });  
 
       })
