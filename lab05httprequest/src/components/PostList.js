@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
-
 class PostList extends Component {
   constructor(props) {
     super(props)
@@ -58,13 +57,11 @@ class PostList extends Component {
             </thead>
             <tbody>
               {posts.map((post, item) => 
-                <tr key={(post.id)}>
-                
+                <tr key={(post.id)}>                
                 <td>{post.id}</td>
                 <td>{post.title}</td>
                 <td><img src={post.thumbnailUrl} alt="thumbnail"></img></td>                
-                <td><button onClick={(e) => this.deleteRow(post.id, e)}>delete</button></td>
-                
+                <td><button onClick={(e) => this.deleteRow(post.id, e)}>delete</button></td>                
                 </tr>
               )}
             </tbody>
