@@ -23,17 +23,33 @@ class PostList extends Component {
             })
     }
     
-    
+    getPosts = () => {
+      
+      axios.get(`https://jsonplaceholder.typicode.com/photos`).then((response) => {
+        const posts = [];
+            for (let key in response.data) {
+                posts.push({ ...response.data[key], id: key });
+            }
+            this.setState({
+                posts: posts,
+            })
+      });
+  };
+
     deleteRow= (id, e) => {   
-      e.preventDefault();   
+      e.preventDefault();  
       
       axios.delete(`https://jsonplaceholder.typicode.com/photos/${id}`) 
-        .then(res => console.log('Deleted', res))
+        .then(response => {
+          console.log('Deleted', response);
+          this.getPosts();
+              
+          })
         .catch(err => console.log(err))  
 
     }  
 
-    
+  
     
   render() {
     const{posts, errorMessage} = this.state
@@ -63,7 +79,7 @@ class PostList extends Component {
             <td>{post.id}</td>
             <td>{post.title}</td>
             <td><img src={post.thumbnailUrl} alt="thumbnail"></img></td>
-            <td><button value={post.id} onClick={(e) => this.deleteRow(post.id, e)}>delete</button></td>
+            <td><button onClick={(e) => this.deleteRow(post.id, e)}>delete</button></td>
           </tr>
         </table> 
         </form> 
