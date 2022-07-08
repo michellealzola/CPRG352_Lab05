@@ -7,7 +7,8 @@ class PostList extends Component {
     
       this.state = {
          posts: [],
-         error: ''
+         error: '',
+         id: ''
       }
     }
     componentDidMount(){
@@ -21,6 +22,19 @@ class PostList extends Component {
                 this.setState({errorMessage: 'Error retrieving data'})
             })
     }
+    
+    
+    deleteRow= (id, e) => {   
+      e.preventDefault();   
+      
+      axios.delete(`https://jsonplaceholder.typicode.com/photos/${id}`) 
+        .then(res => console.log('Deleted', res))
+        .catch(err => console.log(err))  
+
+    }  
+
+    
+    
   render() {
     const{posts, errorMessage} = this.state
     return (
@@ -42,17 +56,20 @@ class PostList extends Component {
       {
         posts.length?
         posts.map(post => 
-        <div>
+        <div key={(post.id)}>
+        <form >    
         <table>          
-          <tr key={(post.id)}>
+          <tr >
             <td>{post.id}</td>
             <td>{post.title}</td>
             <td><img src={post.thumbnailUrl} alt="thumbnail"></img></td>
-            <td><button>delete</button></td>
+            <td><button value={post.id} onClick={(e) => this.deleteRow(post.id, e)}>delete</button></td>
           </tr>
-        </table>          
+        </table> 
+        </form> 
         </div>):
         null
+        
       }
       {
         <div>{errorMessage}</div>
